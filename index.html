@@ -279,64 +279,6 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2017/10/18/chatterbot-try/">开源的聊天机器人框架Chatterbot初探</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017-10-18
-        </span>
-        
-        
-        <div class="post-visits"
-             data-url="/2017/10/18/chatterbot-try/"
-             data-title="开源的聊天机器人框架Chatterbot初探">
-            阅读次数
-          </div>
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://github.com/gunthercox/ChatterBot" target="_blank" rel="noopener">Chatterbot</a>(<a href="http://chatterbot.readthedocs.io/" target="_blank" rel="noopener">文档</a>)是个开源的python聊天机器人框架，在github上有4000+的star，提交还是很活跃的，看了下功能，不仅支持中文，自定义语料库，还支持自学习聊天的能力，在此对其进行初步的调研。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>一个未经训练的ChatterBot机器人,并没有与用户交谈所需的知识。每当用户输入一句话，机器人将存下它，同时也存下答复的句子。 随着机器人接受的输入的增加，它能够回答的问题的数量和准确度都会相应提升.程序是如何响应用户输入的呢？首先从已知句子中匹配出与用户输入最相近的句子（如何衡量相近, 大家可以想想）,之后找到最有可能的回复，那么如何得出最有可能的回复呢？由所有和机器交流过的人们，对这个输入问题（匹配过的）的各个回答的频率决定。
-摘自<a href="http://blog.just4fun.site/create-a-smart-chat-bot.html" target="_blank" rel="noopener">构建自己的智能机器人</a></p>
-<h3 id="语料库初窥"><a href="#语料库初窥" class="headerlink" title="语料库初窥"></a>语料库初窥</h3><p>既然支持语料库的训练，我们就先来看下语料库<a href="https://github.com/gunthercox/chatterbot-corpus" target="_blank" rel="noopener">chatterbot-corpus</a>的结构，以其中的<a href="https://github.com/gunthercox/chatterbot-corpus/tree/master/chatterbot_corpus/data/chinese" target="_blank" rel="noopener">中文语料库</a>为例，包含三个yaml文件：</p>
-<ul>
-<li><a href="https://github.com/gunthercox/chatterbot-corpus/blob/master/chatterbot_corpus/data/chinese/conversations.yml" target="_blank" rel="noopener">conversations.yaml</a> </li>
-<li><a href="https://github.com/gunthercox/chatterbot-corpus/blob/master/chatterbot_corpus/data/chinese/greetings.yml" target="_blank" rel="noopener">greetings.yml</a></li>
-<li><a href="https://github.com/gunthercox/chatterbot-corpus/blob/master/chatterbot_corpus/data/chinese/trivia.yml" target="_blank" rel="noopener">trivia.yml</a></li>
-</ul>
-          <div class="read-more">
-            <a href="/2017/10/18/chatterbot-try/" class="read-more-link">Read more..</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
           <a class="post-link" href="/2017/10/16/python-env/">pyenv配置python多版本开发环境</a>
         
       </h1>
@@ -373,58 +315,6 @@
 按照官方文档配置即可，在此不赘述。
           <div class="read-more">
             <a href="/2017/10/16/python-env/" class="read-more-link">Read more..</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/10/15/hello-world/">Hello World</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017-10-15
-        </span>
-        
-        
-        <div class="post-visits"
-             data-url="/2017/10/15/hello-world/"
-             data-title="Hello World">
-            阅读次数
-          </div>
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a>
-          <div class="read-more">
-            <a href="/2017/10/15/hello-world/" class="read-more-link">Read more..</a>
           </div>
         
       
