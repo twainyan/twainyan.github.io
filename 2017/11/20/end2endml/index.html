@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="End-to-End Machine Learning Project"/>
+
+
+
+
+  <meta name="keywords" content="读书笔记, hands on machine learning, Twein" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Twein">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://tweinyan.github.io/2017/11/20/end2endml/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "tfwzrKftgdGSDy3vNskOcpEn-gzGzoHsz",
+      appKey: "elvQ7GzIotGbjCp7h9yNJPB9"
+    });
+  </script>
+
+
+
+
+
+    <title> End-to-End Machine Learning Project - Twein </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Twein</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Twein</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          End-to-End Machine Learning Project
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-11-20
+        </span>
+        
+        
+        <div class="post-visits"
+             data-url="/2017/11/20/end2endml/"
+             data-title="End-to-End Machine Learning Project">
+            阅读次数
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#fetch-the-data"><span class="toc-text">fetch the data:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#load-data-using-Pandas"><span class="toc-text">load data using Pandas:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-Test-Set"><span class="toc-text">Create a Test Set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Discover-and-Visualize-the-Data-to-Gain-Insights"><span class="toc-text">Discover and Visualize the Data to Gain Insights</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Visualizing-Geographical-Data"><span class="toc-text">Visualizing Geographical Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Experimenting-with-Attribute-Combinations"><span class="toc-text">Experimenting with Attribute Combinations</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prepare-the-Data-for-Machine-Learning-Algorithms"><span class="toc-text">Prepare the Data for Machine Learning Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Cleaning"><span class="toc-text">Data Cleaning</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handling-Text-and-Categorical-Attributes"><span class="toc-text">Handling Text and Categorical Attributes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#one-hot-encoding"><span class="toc-text">one-hot encoding</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Custom-Transformers"><span class="toc-text">Custom Transformers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Feature-Scaling"><span class="toc-text">Feature Scaling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Transformation-Pipelines"><span class="toc-text">Transformation Pipelines</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bug-fix"><span class="toc-text">bug fix:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Select-and-Train-a-Model"><span class="toc-text">Select and Train a Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Training-and-Evaluating-on-the-Training-Set"><span class="toc-text">Training and Evaluating on the Training Set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Better-Evaluation-Using-Cross-Validation"><span class="toc-text">Better Evaluation Using Cross-Validation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Decision-Tree"><span class="toc-text">Decision Tree</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Linear-Regression"><span class="toc-text">Linear Regression</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RandomForestRegressor"><span class="toc-text">RandomForestRegressor</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fine-Tune-Your-Model"><span class="toc-text">Fine-Tune Your Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Grid-Search"><span class="toc-text">Grid Search</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Analyze-the-Best-Models-and-Their-Errors"><span class="toc-text">Analyze the Best Models and Their Errors</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Evalute-Your-System-on-the-Test-Set"><span class="toc-text">Evalute Your System on the Test Set</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h4 id="fetch-the-data"><a href="#fetch-the-data" class="headerlink" title="fetch the data:"></a>fetch the data:</h4><a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> tarfile</span><br><span class="line"><span class="keyword">from</span> six.moves <span class="keyword">import</span> urllib</span><br><span class="line"></span><br><span class="line">DOWNLOAD_ROOT = <span class="string">"https://raw.githubusercontent.com/ageron/handson-ml/master/"</span></span><br><span class="line">HOUSING_PATH = <span class="string">"datasets/housing"</span></span><br><span class="line">HOUSING_URL = DOWNLOAD_ROOT + HOUSING_PATH + <span class="string">"/housing.tgz"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fetch_housing_data</span><span class="params">(housing_url=HOUSING_URL, housing_path=HOUSING_PATH)</span>:</span> </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(housing_path):</span><br><span class="line">        os.makedirs(housing_path)</span><br><span class="line">    tgz_path = os.path.join(housing_path, <span class="string">"housing.tgz"</span>)</span><br><span class="line">    urllib.request.urlretrieve(housing_url, tgz_path)</span><br><span class="line">    housing_tgz = tarfile.open(tgz_path)</span><br><span class="line">    housing_tgz.extractall(path=housing_path)</span><br><span class="line">    housing_tgz.close()</span><br><span class="line">    </span><br><span class="line">fetch_housing_data()</span><br></pre></td></tr></table></figure>
+<h4 id="load-data-using-Pandas"><a href="#load-data-using-Pandas" class="headerlink" title="load data using Pandas:"></a>load data using Pandas:</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_housing_data</span><span class="params">(housing_path=HOUSING_PATH)</span>:</span></span><br><span class="line">    csv_path = os.path.join(housing_path, <span class="string">"housing.csv"</span>)</span><br><span class="line">    <span class="keyword">return</span> pd.read_csv(csv_path)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">housing = load_housing_data()</span><br><span class="line">housing.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-122.23</td>
+      <td>37.88</td>
+      <td>41.0</td>
+      <td>880.0</td>
+      <td>129.0</td>
+      <td>322.0</td>
+      <td>126.0</td>
+      <td>8.3252</td>
+      <td>452600.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-122.22</td>
+      <td>37.86</td>
+      <td>21.0</td>
+      <td>7099.0</td>
+      <td>1106.0</td>
+      <td>2401.0</td>
+      <td>1138.0</td>
+      <td>8.3014</td>
+      <td>358500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-122.24</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1467.0</td>
+      <td>190.0</td>
+      <td>496.0</td>
+      <td>177.0</td>
+      <td>7.2574</td>
+      <td>352100.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-122.25</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1274.0</td>
+      <td>235.0</td>
+      <td>558.0</td>
+      <td>219.0</td>
+      <td>5.6431</td>
+      <td>341300.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-122.25</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1627.0</td>
+      <td>280.0</td>
+      <td>565.0</td>
+      <td>259.0</td>
+      <td>3.8462</td>
+      <td>342200.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>The info() method is useful to get a quick description of the data, in particular the total number of rows, and each attribute’s type and number of non-null values </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">housing.info()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &apos;pandas.core.frame.DataFrame&apos;&gt;
+RangeIndex: 20640 entries, 0 to 20639
+Data columns (total 10 columns):
+longitude             20640 non-null float64
+latitude              20640 non-null float64
+housing_median_age    20640 non-null float64
+total_rooms           20640 non-null float64
+total_bedrooms        20433 non-null float64
+population            20640 non-null float64
+households            20640 non-null float64
+median_income         20640 non-null float64
+median_house_value    20640 non-null float64
+ocean_proximity       20640 non-null object
+dtypes: float64(9), object(1)
+memory usage: 1.6+ MB
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">housing[<span class="string">"ocean_proximity"</span>].value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;1H OCEAN     9136
+INLAND        6551
+NEAR OCEAN    2658
+NEAR BAY      2290
+ISLAND           5
+Name: ocean_proximity, dtype: int64
+</code></pre><p>The describe() method shows a summary of the numerical attributes</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">housing.describe()</span><br></pre></td></tr></table></figure>
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20433.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-119.569704</td>
+      <td>35.631861</td>
+      <td>28.639486</td>
+      <td>2635.763081</td>
+      <td>537.870553</td>
+      <td>1425.476744</td>
+      <td>499.539680</td>
+      <td>3.870671</td>
+      <td>206855.816909</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2.003532</td>
+      <td>2.135952</td>
+      <td>12.585558</td>
+      <td>2181.615252</td>
+      <td>421.385070</td>
+      <td>1132.462122</td>
+      <td>382.329753</td>
+      <td>1.899822</td>
+      <td>115395.615874</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-124.350000</td>
+      <td>32.540000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>1.000000</td>
+      <td>0.499900</td>
+      <td>14999.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-121.800000</td>
+      <td>33.930000</td>
+      <td>18.000000</td>
+      <td>1447.750000</td>
+      <td>296.000000</td>
+      <td>787.000000</td>
+      <td>280.000000</td>
+      <td>2.563400</td>
+      <td>119600.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-118.490000</td>
+      <td>34.260000</td>
+      <td>29.000000</td>
+      <td>2127.000000</td>
+      <td>435.000000</td>
+      <td>1166.000000</td>
+      <td>409.000000</td>
+      <td>3.534800</td>
+      <td>179700.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>-118.010000</td>
+      <td>37.710000</td>
+      <td>37.000000</td>
+      <td>3148.000000</td>
+      <td>647.000000</td>
+      <td>1725.000000</td>
+      <td>605.000000</td>
+      <td>4.743250</td>
+      <td>264725.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>-114.310000</td>
+      <td>41.950000</td>
+      <td>52.000000</td>
+      <td>39320.000000</td>
+      <td>6445.000000</td>
+      <td>35682.000000</td>
+      <td>6082.000000</td>
+      <td>15.000100</td>
+      <td>500001.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline </span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">housing.hist(bins=<span class="number">50</span>, figsize=(<span class="number">20</span>, <span class="number">15</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_10_0.png" alt="png"></p>
+<h3 id="Create-a-Test-Set"><a href="#Create-a-Test-Set" class="headerlink" title="Create a Test Set"></a>Create a Test Set</h3><p>just pick some instances randomly, typically 20% of the dataset, and set them aside:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">split_train_test</span><span class="params">(data, test_ratio)</span>:</span></span><br><span class="line">    shuffled_indices = np.random.permutation(len(data))</span><br><span class="line">    test_set_size = int(len(data) * test_ratio)</span><br><span class="line">    test_indices = shuffled_indices[:test_set_size]</span><br><span class="line">    train_indices = shuffled_indices[test_set_size:]</span><br><span class="line">    <span class="keyword">return</span> data.iloc[train_indices], data.iloc[test_indices]</span><br><span class="line"></span><br><span class="line">train_set, test_set = split_train_test(housing, <span class="number">0.2</span>)</span><br><span class="line">print(len(train_set), <span class="string">"train +"</span>, len(test_set), <span class="string">"test"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>16512 train + 4128 test
+</code></pre><p>A common solution is to use each instance’s identifier to decide whether or not it should go in the test set. For example, you could compute a hash of each instance’s identifier, keep only the last byte of the hash, and put the instance in the test set if this value is lower or equal to 51.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_set_check</span><span class="params">(identifier, test_ratio, hash)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> hash(np.int64(identifier)).digest()[<span class="number">-1</span>] &lt; <span class="number">256</span> * test_ratio</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">split_train_test_by_id</span><span class="params">(data, test_radio, id_column, hash=hashlib.md5)</span>:</span></span><br><span class="line">    ids = data[id_column]</span><br><span class="line">    in_test_set = ids.apply(<span class="keyword">lambda</span> id_: test_set_check(id_, test_radio, hash))</span><br><span class="line">    <span class="keyword">return</span> data.loc[~in_test_set], data.loc[in_test_set]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># housing_with_id = housing.reset_index() # adds an 'index' column</span></span><br><span class="line"><span class="comment"># train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, "index")</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># housing_with_id["id"] = housing["longitude"] * 1000 + housing["latitude"]</span></span><br><span class="line"><span class="comment"># train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, "id")</span></span><br><span class="line"><span class="comment"># from sklearn.model_selection import train_test_split</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">housing[<span class="string">"income_cat"</span>] = np.ceil(housing[<span class="string">"median_income"</span>] / <span class="number">1.5</span>)</span><br><span class="line">housing[<span class="string">"income_cat"</span>].where(housing[<span class="string">"income_cat"</span>] &lt; <span class="number">5</span>, <span class="number">5.0</span>, inplace=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">train_set, test_set = train_test_split(housing, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+<p>stratified sampling based on the income category </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> StratifiedShuffleSplit</span><br><span class="line"></span><br><span class="line">split = StratifiedShuffleSplit(n_splits=<span class="number">1</span>, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line"><span class="keyword">for</span> train_index, test_index <span class="keyword">in</span> split.split(housing, housing[<span class="string">"income_cat"</span>]):</span><br><span class="line">    strat_train_set = housing.loc[train_index]</span><br><span class="line">    strat_test_set = housing.loc[test_index]</span><br><span class="line"></span><br><span class="line">housing[<span class="string">"income_cat"</span>].value_counts() / len(housing)</span><br></pre></td></tr></table></figure>
+<pre><code>3.0    0.350581
+2.0    0.318847
+4.0    0.176308
+5.0    0.114438
+1.0    0.039826
+Name: income_cat, dtype: float64
+</code></pre><p>The test set generated using stratified sampling has income category proportions almost identical to those in the full dataset, whereas the test set generated using purely random sampling is quite skewed.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(strat_test_set[<span class="string">"income_cat"</span>].value_counts() / len(strat_test_set))</span><br><span class="line">test_set[<span class="string">"income_cat"</span>].value_counts() / len(test_set[<span class="string">"income_cat"</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>3.0    0.350533
+2.0    0.318798
+4.0    0.176357
+5.0    0.114583
+1.0    0.039729
+Name: income_cat, dtype: float64
+
+
+
+
+
+3.0    0.358527
+2.0    0.324370
+4.0    0.167393
+5.0    0.109496
+1.0    0.040213
+Name: income_cat, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> set <span class="keyword">in</span> (strat_train_set, strat_test_set):</span><br><span class="line">    set.drop([<span class="string">"income_cat"</span>], axis=<span class="number">1</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Discover-and-Visualize-the-Data-to-Gain-Insights"><a href="#Discover-and-Visualize-the-Data-to-Gain-Insights" class="headerlink" title="Discover and Visualize the Data to Gain Insights"></a>Discover and Visualize the Data to Gain Insights</h3><p>Let’s create a copy so you can play with it without harming the training set:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">housing = strat_train_set.copy()</span><br></pre></td></tr></table></figure>
+<h4 id="Visualizing-Geographical-Data"><a href="#Visualizing-Geographical-Data" class="headerlink" title="Visualizing Geographical Data"></a>Visualizing Geographical Data</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">housing.plot(kind=<span class="string">"scatter"</span>, x=<span class="string">"longitude"</span>, y=<span class="string">"latitude"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x112340b38&gt;
+</code></pre><p><img src="output_25_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># setting the alpha option to 0.1 makes it much easier to visualize the places where there is </span></span><br><span class="line"><span class="comment"># a high density of data points</span></span><br><span class="line">housing.plot(kind=<span class="string">"scatter"</span>, x=<span class="string">"longitude"</span>, y=<span class="string">"latitude"</span>, alpha=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x112a02f28&gt;
+</code></pre><p><img src="output_26_1.png" alt="png"></p>
+<p>The radius of each circle represents the district’s population (option s), and the color represents the price (option c). We will use a predefinded color map (option cmap) called jet, which rangs from blue (low values) to red (high prices):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">housing.plot(kind=<span class="string">"scatter"</span>, x=<span class="string">"longitude"</span>, y=<span class="string">"latitude"</span>, alpha=<span class="number">0.4</span>,</span><br><span class="line">            s=housing[<span class="string">"population"</span>]/<span class="number">100</span>, label=<span class="string">"population"</span>,</span><br><span class="line">            c=<span class="string">"median_house_value"</span>, cmap=plt.get_cmap(<span class="string">"jet"</span>), colorbar=<span class="keyword">True</span></span><br><span class="line">            )</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.legend.Legend at 0x112c5dba8&gt;
+</code></pre><p><img src="output_28_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">corr_matrix = housing.corr()</span><br><span class="line">corr_matrix[<span class="string">"median_house_value"</span>].sort_values(ascending=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>median_house_value    1.000000
+median_income         0.687160
+total_rooms           0.135097
+housing_median_age    0.114110
+households            0.064506
+total_bedrooms        0.047689
+population           -0.026920
+longitude            -0.047432
+latitude             -0.142724
+Name: median_house_value, dtype: float64
+</code></pre><p>Another way to check for correlation between attributes is to use Pandas’ scatter_matrix function, which plots every numerical attribute against every other numerical attribute.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pandas.tools.plotting <span class="keyword">import</span> scatter_matrix</span><br><span class="line"></span><br><span class="line">attributes = [<span class="string">"median_house_value"</span>, <span class="string">"median_income"</span>, <span class="string">"total_rooms"</span>,</span><br><span class="line">             <span class="string">"housing_median_age"</span>]</span><br><span class="line">scatter_matrix(housing[attributes], figsize=(<span class="number">12</span>, <span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>/Users/tweinyan/.pyenv/versions/3.6.2/envs/venv36/lib/python3.6/site-packages/ipykernel_launcher.py:5: FutureWarning: &apos;pandas.tools.plotting.scatter_matrix&apos; is deprecated, import &apos;pandas.plotting.scatter_matrix&apos; instead.
+  &quot;&quot;&quot;
+
+
+
+
+
+array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x112b8ea58&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f875390&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x110007080&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f82b2e8&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f77fbe0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f77fba8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f736400&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f774f60&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f6cf400&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f6a8a20&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f642da0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f688668&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f5c5d30&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f623588&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10ffca908&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10ff60ac8&gt;]], dtype=object)
+</code></pre><p><img src="output_31_2.png" alt="png"></p>
+<p>The most promising attribute to predict the median house value is the median income</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">housing.plot(kind=<span class="string">"scatter"</span>, x=<span class="string">"median_income"</span>, y=<span class="string">"median_house_value"</span>,</span><br><span class="line">            alpha=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10f532be0&gt;
+</code></pre><p><img src="output_33_1.png" alt="png"></p>
+<p>在500000，450000，350000附近有直线，为了不对算法造成不良影响，需要去除</p>
+<h4 id="Experimenting-with-Attribute-Combinations"><a href="#Experimenting-with-Attribute-Combinations" class="headerlink" title="Experimenting with Attribute Combinations"></a>Experimenting with Attribute Combinations</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">housing[<span class="string">"rooms_per_household"</span>] = housing[<span class="string">"total_rooms"</span>]/housing[<span class="string">"households"</span>]</span><br><span class="line">housing[<span class="string">"bedrooms_per_room"</span>] = housing[<span class="string">"total_bedrooms"</span>]/housing[<span class="string">"total_rooms"</span>]</span><br><span class="line">housing[<span class="string">"population_per_household"</span>] = housing[<span class="string">"population"</span>]/housing[<span class="string">"households"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">corr_matrix = housing.corr()</span><br><span class="line">corr_matrix[<span class="string">"median_house_value"</span>].sort_values(ascending=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>median_house_value          1.000000
+median_income               0.687160
+rooms_per_household         0.146285
+total_rooms                 0.135097
+housing_median_age          0.114110
+households                  0.064506
+total_bedrooms              0.047689
+population_per_household   -0.021985
+population                 -0.026920
+longitude                  -0.047432
+latitude                   -0.142724
+bedrooms_per_room          -0.259984
+Name: median_house_value, dtype: float64
+</code></pre><h3 id="Prepare-the-Data-for-Machine-Learning-Algorithms"><a href="#Prepare-the-Data-for-Machine-Learning-Algorithms" class="headerlink" title="Prepare the Data for Machine Learning Algorithms"></a>Prepare the Data for Machine Learning Algorithms</h3><p>separate the predictors and the labels</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">housing = strat_train_set.drop(<span class="string">"median_house_value"</span>, axis=<span class="number">1</span>)</span><br><span class="line">housing_labels = strat_train_set[<span class="string">"median_house_value"</span>].copy()</span><br></pre></td></tr></table></figure>
+<h4 id="Data-Cleaning"><a href="#Data-Cleaning" class="headerlink" title="Data Cleaning"></a>Data Cleaning</h4><p>The total_bedrooms attribute has some missing values. You have three options:</p>
+<ul>
+<li>Get rid of the corresponding districts.</li>
+<li>Get rid of the whole attribute.</li>
+<li>Set the values to some value (zero, the mean, the median, etc.)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># housing.dropna(subset=["total_bedrooms"]) # option 1</span></span><br><span class="line"><span class="comment"># housing.drop("total_bedrooms", axis=1) # option 2</span></span><br><span class="line"><span class="comment"># median = housing["total_bedrooms"].median()</span></span><br><span class="line"><span class="comment"># housing["total_bedrooms"].fillna(median) # option 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Scikit-learn provides a handy class to take care of missing values: Imputer</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> Imputer</span><br><span class="line">imputer = Imputer(strategy=<span class="string">"median"</span>)</span><br><span class="line">housing_num = housing.drop(<span class="string">"ocean_proximity"</span>, axis=<span class="number">1</span>)</span><br><span class="line">imputer.fit(housing_num)</span><br><span class="line">imputer.statistics_</span><br><span class="line"></span><br><span class="line">housing_num.median().values</span><br></pre></td></tr></table></figure>
+<pre><code>array([ -118.51  ,    34.26  ,    29.    ,  2119.5   ,   433.    ,
+        1164.    ,   408.    ,     3.5409])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = imputer.transform(housing_num)</span><br><span class="line">housing_tr = pd.DataFrame(X, columns=housing_num.columns)</span><br></pre></td></tr></table></figure>
+<h4 id="Handling-Text-and-Categorical-Attributes"><a href="#Handling-Text-and-Categorical-Attributes" class="headerlink" title="Handling Text and Categorical Attributes"></a>Handling Text and Categorical Attributes</h4><p>ocean_proximity is a text attribute, let’s convert these text labels to numbers</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line"></span><br><span class="line">encoder = LabelEncoder()</span><br><span class="line">housing_cat = housing[<span class="string">"ocean_proximity"</span>]</span><br><span class="line">housing_cat_encoded = encoder.fit_transform(housing_cat)</span><br><span class="line">housing_cat_encoded</span><br></pre></td></tr></table></figure>
+<pre><code>array([0, 0, 4, ..., 1, 0, 3])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(encoder.classes_)</span><br></pre></td></tr></table></figure>
+<pre><code>[&apos;&lt;1H OCEAN&apos; &apos;INLAND&apos; &apos;ISLAND&apos; &apos;NEAR BAY&apos; &apos;NEAR OCEAN&apos;]
+</code></pre><p>0对应’&lt;1H OCEAN’， 4对应’NEAR OCEAN’，两个相近属性对应的值距离太远，显然这不是我们想要的。</p>
+<h4 id="one-hot-encoding"><a href="#one-hot-encoding" class="headerlink" title="one-hot encoding"></a>one-hot encoding</h4><p>To fix this issue, a common solution is to create one binary attribute per category: one attribute equal to 1 when the category is “&lt;1H OCEAN” (and 0 otherwise), another attribute equal to 1 when the category is “INLAND” (and 0 otherwise), and so on. This is called one-hot encoding, because only one attribute will be equal to 1 (hot), while the others will be 0 (cold).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line">encoder = OneHotEncoder()</span><br><span class="line">housing_cat_1hot = encoder.fit_transform(housing_cat_encoded.reshape(<span class="number">-1</span>, <span class="number">1</span>))</span><br><span class="line">housing_cat_1hot</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;16512x5 sparse matrix of type &apos;&lt;class &apos;numpy.float64&apos;&gt;&apos;
+    with 16512 stored elements in Compressed Sparse Row format&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># convert it to a dense NumPy array</span></span><br><span class="line">housing_cat_1hot.toarray()</span><br></pre></td></tr></table></figure>
+<pre><code>array([[ 1.,  0.,  0.,  0.,  0.],
+       [ 1.,  0.,  0.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.,  1.],
+       ..., 
+       [ 0.,  1.,  0.,  0.,  0.],
+       [ 1.,  0.,  0.,  0.,  0.],
+       [ 0.,  0.,  0.,  1.,  0.]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用LabelBinarizer代替以上两个</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelBinarizer</span><br><span class="line">encoder = LabelBinarizer()</span><br><span class="line">housing_cat_1hot = encoder.fit_transform(housing_cat)</span><br><span class="line">housing_cat_1hot</span><br></pre></td></tr></table></figure>
+<pre><code>array([[1, 0, 0, 0, 0],
+       [1, 0, 0, 0, 0],
+       [0, 0, 0, 0, 1],
+       ..., 
+       [0, 1, 0, 0, 0],
+       [1, 0, 0, 0, 0],
+       [0, 0, 0, 1, 0]])
+</code></pre><h4 id="Custom-Transformers"><a href="#Custom-Transformers" class="headerlink" title="Custom Transformers"></a>Custom Transformers</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.base <span class="keyword">import</span> BaseEstimator, TransformerMixin</span><br><span class="line">rooms_ix, bedrooms_ix, population_ix, household_ix = <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span></span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CombinedAttributesAdder</span><span class="params">(BaseEstimator, TransformerMixin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, add_bedrooms_per_room = True)</span>:</span> <span class="comment"># no *args or **kargs</span></span><br><span class="line">        self.add_bedrooms_per_room = add_bedrooms_per_room </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=None)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self <span class="comment"># nothing else to do </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, X, y=None)</span>:</span></span><br><span class="line">        rooms_per_household = X[:, rooms_ix] / X[:, household_ix] </span><br><span class="line">        population_per_household = X[:, population_ix] / X[:, household_ix] </span><br><span class="line">        <span class="keyword">if</span> self.add_bedrooms_per_room:</span><br><span class="line">            bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]</span><br><span class="line">            <span class="keyword">return</span> np.c_[X, rooms_per_household, population_per_household, bedrooms_per_room]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> np.c_[X, rooms_per_household, population_per_household]</span><br><span class="line"></span><br><span class="line">attr_adder = CombinedAttributesAdder(add_bedrooms_per_room=<span class="keyword">False</span>)</span><br><span class="line">housing_extra_attribs = attr_adder.transform(housing.values)</span><br></pre></td></tr></table></figure>
+<h4 id="Feature-Scaling"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</h4><ul>
+<li>Min-max scaling</li>
+<li>Standardization</li>
+</ul>
+<h4 id="Transformation-Pipelines"><a href="#Transformation-Pipelines" class="headerlink" title="Transformation Pipelines"></a>Transformation Pipelines</h4><p>A small pipeline for the numerical attributes:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">num_pipeline = Pipeline([</span><br><span class="line">        (<span class="string">'imputer'</span>, Imputer(strategy=<span class="string">"median"</span>)),</span><br><span class="line">        (<span class="string">'attribs_adder'</span>, CombinedAttributesAdder()),</span><br><span class="line">        (<span class="string">'std_scaler'</span>, StandardScaler()),</span><br><span class="line">    ])</span><br><span class="line">housing_num_tr = num_pipeline.fit_transform(housing_num)</span><br></pre></td></tr></table></figure>
+<h4 id="bug-fix"><a href="#bug-fix" class="headerlink" title="bug fix:"></a>bug fix:</h4><p><a href="https://stackoverflow.com/questions/46162855/fit-transform-takes-2-positional-arguments-but-3-were-given-with-labelbinarize" target="_blank" rel="noopener">https://stackoverflow.com/questions/46162855/fit-transform-takes-2-positional-arguments-but-3-were-given-with-labelbinarize</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> FeatureUnion</span><br><span class="line"></span><br><span class="line">num_attribs = list(housing_num)</span><br><span class="line">cat_attribs = [<span class="string">"ocean_proximity"</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.base <span class="keyword">import</span> BaseEstimator, TransformerMixin</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataFrameSelector</span><span class="params">(BaseEstimator, TransformerMixin)</span>:</span> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, attribute_names)</span>:</span></span><br><span class="line">        self.attribute_names = attribute_names </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=None)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, X, y=None)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> X[self.attribute_names].values</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LableBinarizer_new</span><span class="params">(BaseEstimator, TransformerMixin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=<span class="number">0</span>)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, X, y=<span class="number">0</span>)</span>:</span></span><br><span class="line">        encoder = LabelBinarizer()</span><br><span class="line">        result = encoder.fit_transform(X)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    </span><br><span class="line">num_pipeline = Pipeline([</span><br><span class="line">    (<span class="string">'selector'</span>, DataFrameSelector(num_attribs)),</span><br><span class="line">    (<span class="string">'imputer'</span>, Imputer(strategy=<span class="string">"median"</span>)),</span><br><span class="line">    (<span class="string">'attribs_adder'</span>, CombinedAttributesAdder()),</span><br><span class="line">    (<span class="string">'std_scaler'</span>, StandardScaler()),</span><br><span class="line">])</span><br><span class="line">cat_pipeline = Pipeline([</span><br><span class="line">    (<span class="string">'selector'</span>, DataFrameSelector(cat_attribs)),</span><br><span class="line">    (<span class="string">'label_binarizer'</span>, LabelBinarizer()),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">full_pipeline = FeatureUnion(transformer_list=[</span><br><span class="line">    (<span class="string">"num_pipeline"</span>, num_pipeline),</span><br><span class="line">    (<span class="string">"cat_pipeline"</span>, cat_pipeline)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">housing_prepared = full_pipeline.fit_transform(housing)</span><br><span class="line">housing_prepared</span><br></pre></td></tr></table></figure>
+<pre><code>array([[-1.15604281,  0.77194962,  0.74333089, ...,  0.        ,
+         0.        ,  0.        ],
+       [-1.17602483,  0.6596948 , -1.1653172 , ...,  0.        ,
+         0.        ,  0.        ],
+       [ 1.18684903, -1.34218285,  0.18664186, ...,  0.        ,
+         0.        ,  1.        ],
+       ..., 
+       [ 1.58648943, -0.72478134, -1.56295222, ...,  0.        ,
+         0.        ,  0.        ],
+       [ 0.78221312, -0.85106801,  0.18664186, ...,  0.        ,
+         0.        ,  0.        ],
+       [-1.43579109,  0.99645926,  1.85670895, ...,  0.        ,
+         1.        ,  0.        ]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">housing_prepared.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(16512, 16)
+</code></pre><h3 id="Select-and-Train-a-Model"><a href="#Select-and-Train-a-Model" class="headerlink" title="Select and Train a Model"></a>Select and Train a Model</h3><h4 id="Training-and-Evaluating-on-the-Training-Set"><a href="#Training-and-Evaluating-on-the-Training-Set" class="headerlink" title="Training and Evaluating on the Training Set"></a>Training and Evaluating on the Training Set</h4><p>Train a Linear Regression model</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"></span><br><span class="line">lin_reg = LinearRegression()</span><br><span class="line">lin_reg.fit(housing_prepared, housing_labels)</span><br></pre></td></tr></table></figure>
+<pre><code>/Users/tweinyan/.pyenv/versions/3.6.2/envs/venv36/lib/python3.6/site-packages/scipy/linalg/basic.py:1018: RuntimeWarning: internal gelsd driver lwork query error, required iwork dimension not returned. This is likely the result of LAPACK bug 0038, fixed in LAPACK 3.2.2 (released July 21, 2010). Falling back to &apos;gelss&apos; driver.
+  warnings.warn(mesg, RuntimeWarning)
+
+
+
+
+
+LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">some_data = housing.iloc[:<span class="number">5</span>]</span><br><span class="line">some_labels = housing_labels.iloc[:<span class="number">5</span>]</span><br><span class="line">some_data_prepared = full_pipeline.transform(some_data)</span><br><span class="line">print(<span class="string">"Predictions:\t"</span>, lin_reg.predict(some_data_prepared))</span><br><span class="line">print(<span class="string">"Labels:\t\t"</span>, list(some_labels))</span><br></pre></td></tr></table></figure>
+<pre><code>Predictions:     [ 210644.60459286  317768.80697211  210956.43331178   59218.98886849
+  189747.55849878]
+Labels:         [286600.0, 340600.0, 196900.0, 46300.0, 254500.0]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line">housing_predictions = lin_reg.predict(housing_prepared)</span><br><span class="line">lin_mse = mean_squared_error(housing_labels, housing_predictions)</span><br><span class="line">lin_rmse = np.sqrt(lin_mse)</span><br><span class="line">lin_rmse</span><br></pre></td></tr></table></figure>
+<pre><code>68628.198198489219
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line">tree_reg = DecisionTreeRegressor()</span><br><span class="line">tree_reg.fit(housing_prepared, housing_labels)</span><br><span class="line"></span><br><span class="line">housing_predictions = tree_reg.predict(housing_prepared)</span><br><span class="line">tree_mse = mean_squared_error(housing_labels, housing_predictions)</span><br><span class="line">tree_rmse = np.sqrt(tree_mse)</span><br><span class="line">tree_rmse</span><br></pre></td></tr></table></figure>
+<pre><code>0.0
+</code></pre><p>看上去过拟合了，但是我们并不想在测试集上验证，所以需要一个交叉验证集</p>
+<h4 id="Better-Evaluation-Using-Cross-Validation"><a href="#Better-Evaluation-Using-Cross-Validation" class="headerlink" title="Better Evaluation Using Cross-Validation"></a>Better Evaluation Using Cross-Validation</h4><p>Use Scikit-Learn’s cross-validation.
+Performs K-fold coross-validation: it randomly splits the training set into 10 distinct subsets called folds, then it
+trains and evaluates the Decision Tree model 10 times, picking a different fold for evaluation every time and training on the other 9 folds.</p>
+<h5 id="Decision-Tree"><a href="#Decision-Tree" class="headerlink" title="Decision Tree"></a>Decision Tree</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># the result is an array containing the 10 evaluation scores</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line">scores = cross_val_score(tree_reg, housing_prepared, housing_labels,</span><br><span class="line">                        scoring=<span class="string">"neg_mean_squared_error"</span>, cv=<span class="number">10</span>)</span><br><span class="line">tree_rmse_scores = np.sqrt(-scores)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display_scores</span><span class="params">(scores)</span>:</span></span><br><span class="line">    print(<span class="string">"Scores:"</span>, scores)</span><br><span class="line">    print(<span class="string">"Mean:"</span>, scores.mean())</span><br><span class="line">    print(<span class="string">"Standard deviation:"</span>, scores.std())</span><br><span class="line">    </span><br><span class="line">display_scores(tree_rmse_scores)</span><br></pre></td></tr></table></figure>
+<pre><code>Scores: [ 68598.67166286  65608.52457119  70810.0869789   69211.66220381
+  72014.87961395  75011.86954035  71534.25262773  70335.79903809
+  76849.90225183  70211.15023877]
+Mean: 71018.6798727
+Standard deviation: 3012.64703648
+</code></pre><h5 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lin_scores = cross_val_score(lin_reg, housing_prepared, housing_labels,</span><br><span class="line">                            scoring=<span class="string">"neg_mean_squared_error"</span>, cv=<span class="number">10</span>)</span><br><span class="line">lin_rmse_scores = np.sqrt(-lin_scores)</span><br><span class="line">display_scores(lin_rmse_scores)</span><br></pre></td></tr></table></figure>
+<pre><code>Scores: [ 66782.73843989  66960.118071    70361.18285107  74742.02956966
+  68022.09224176  71193.07033936  64969.63056405  68276.69992785
+  71543.69797334  67665.10082067]
+Mean: 69051.6360799
+Standard deviation: 2732.39242562
+</code></pre><h5 id="RandomForestRegressor"><a href="#RandomForestRegressor" class="headerlink" title="RandomForestRegressor"></a>RandomForestRegressor</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestRegressor</span><br><span class="line"></span><br><span class="line">forest_reg = RandomForestRegressor()</span><br><span class="line">forest_reg.fit(housing_prepared, housing_labels)</span><br><span class="line">forest_scores = cross_val_score(forest_reg, housing_prepared, housing_labels,</span><br><span class="line">                               scoring=<span class="string">"neg_mean_squared_error"</span>, cv=<span class="number">10</span>)</span><br><span class="line">forest_rmse_scores = np.sqrt(-forest_scores)</span><br><span class="line">display_scores(forest_rmse_scores)</span><br></pre></td></tr></table></figure>
+<pre><code>Scores: [ 50896.82385485  49692.14156589  52932.15059225  54728.28076321
+  52398.83293126  55051.19425456  51192.98572404  50816.1459606
+  55622.24945824  54250.92937433]
+Mean: 52758.1734479
+Standard deviation: 1970.1870403
+</code></pre><h3 id="Fine-Tune-Your-Model"><a href="#Fine-Tune-Your-Model" class="headerlink" title="Fine-Tune Your Model"></a>Fine-Tune Your Model</h3><h4 id="Grid-Search"><a href="#Grid-Search" class="headerlink" title="Grid Search"></a>Grid Search</h4><p>手动调参是乏味且低效的，使用Scikit-Learn的GridSearchCV可以做这件事，只要指定哪些超参，哪些值需要尝试，函数会使用交叉验证
+评价所有超参值的组合。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># best combination of hyperparameter values for the RandomForestRegressor</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"></span><br><span class="line">param_grid = [</span><br><span class="line">    &#123;<span class="string">'n_estimators'</span>: [<span class="number">3</span>, <span class="number">10</span>, <span class="number">30</span>], <span class="string">'max_features'</span>: [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>]&#125;,</span><br><span class="line">    &#123;<span class="string">'bootstrap'</span>: [<span class="keyword">False</span>], <span class="string">'n_estimators'</span>: [<span class="number">3</span>, <span class="number">10</span>], <span class="string">'max_features'</span>: [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]&#125;,</span><br><span class="line">]</span><br><span class="line">forest_reg = RandomForestRegressor()</span><br><span class="line">grid_search = GridSearchCV(forest_reg, param_grid, cv=<span class="number">5</span>,</span><br><span class="line">                          scoring=<span class="string">'neg_mean_squared_error'</span>)</span><br><span class="line">grid_search.fit(housing_prepared, housing_labels)</span><br></pre></td></tr></table></figure>
+<pre><code>GridSearchCV(cv=5, error_score=&apos;raise&apos;,
+       estimator=RandomForestRegressor(bootstrap=True, criterion=&apos;mse&apos;, max_depth=None,
+           max_features=&apos;auto&apos;, max_leaf_nodes=None,
+           min_impurity_split=1e-07, min_samples_leaf=1,
+           min_samples_split=2, min_weight_fraction_leaf=0.0,
+           n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
+           verbose=0, warm_start=False),
+       fit_params={}, iid=True, n_jobs=1,
+       param_grid=[{&apos;n_estimators&apos;: [3, 10, 30], &apos;max_features&apos;: [2, 4, 6, 8]}, {&apos;bootstrap&apos;: [False], &apos;n_estimators&apos;: [3, 10], &apos;max_features&apos;: [2, 3, 4]}],
+       pre_dispatch=&apos;2*n_jobs&apos;, refit=True, return_train_score=True,
+       scoring=&apos;neg_mean_squared_error&apos;, verbose=0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid_search.best_params_</span><br></pre></td></tr></table></figure>
+<pre><code>{&apos;max_features&apos;: 8, &apos;n_estimators&apos;: 30}
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid_search.best_estimator_</span><br></pre></td></tr></table></figure>
+<pre><code>RandomForestRegressor(bootstrap=True, criterion=&apos;mse&apos;, max_depth=None,
+           max_features=8, max_leaf_nodes=None, min_impurity_split=1e-07,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=30, n_jobs=1,
+           oob_score=False, random_state=None, verbose=0, warm_start=False)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cvres = grid_search.cv_results_</span><br><span class="line"><span class="keyword">for</span> mean_score, params <span class="keyword">in</span> zip(cvres[<span class="string">"mean_test_score"</span>], cvres[<span class="string">"params"</span>]):</span><br><span class="line">    print(np.sqrt(-mean_score), params)</span><br></pre></td></tr></table></figure>
+<pre><code>64365.7732082 {&apos;max_features&apos;: 2, &apos;n_estimators&apos;: 3}
+55624.8696251 {&apos;max_features&apos;: 2, &apos;n_estimators&apos;: 10}
+52747.3739976 {&apos;max_features&apos;: 2, &apos;n_estimators&apos;: 30}
+61352.3593931 {&apos;max_features&apos;: 4, &apos;n_estimators&apos;: 3}
+52884.9953945 {&apos;max_features&apos;: 4, &apos;n_estimators&apos;: 10}
+50459.6268283 {&apos;max_features&apos;: 4, &apos;n_estimators&apos;: 30}
+59149.2863452 {&apos;max_features&apos;: 6, &apos;n_estimators&apos;: 3}
+51761.6995007 {&apos;max_features&apos;: 6, &apos;n_estimators&apos;: 10}
+50131.7157433 {&apos;max_features&apos;: 6, &apos;n_estimators&apos;: 30}
+58754.4065217 {&apos;max_features&apos;: 8, &apos;n_estimators&apos;: 3}
+52138.1112373 {&apos;max_features&apos;: 8, &apos;n_estimators&apos;: 10}
+49947.2015882 {&apos;max_features&apos;: 8, &apos;n_estimators&apos;: 30}
+62303.8222151 {&apos;bootstrap&apos;: False, &apos;max_features&apos;: 2, &apos;n_estimators&apos;: 3}
+54700.9998416 {&apos;bootstrap&apos;: False, &apos;max_features&apos;: 2, &apos;n_estimators&apos;: 10}
+60095.3114005 {&apos;bootstrap&apos;: False, &apos;max_features&apos;: 3, &apos;n_estimators&apos;: 3}
+52884.0961431 {&apos;bootstrap&apos;: False, &apos;max_features&apos;: 3, &apos;n_estimators&apos;: 10}
+57626.9358603 {&apos;bootstrap&apos;: False, &apos;max_features&apos;: 4, &apos;n_estimators&apos;: 3}
+51655.3895683 {&apos;bootstrap&apos;: False, &apos;max_features&apos;: 4, &apos;n_estimators&apos;: 10}
+</code></pre><h4 id="Analyze-the-Best-Models-and-Their-Errors"><a href="#Analyze-the-Best-Models-and-Their-Errors" class="headerlink" title="Analyze the Best Models and Their Errors"></a>Analyze the Best Models and Their Errors</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">feature_importances = grid_search.best_estimator_.feature_importances_</span><br><span class="line">feature_importances</span><br></pre></td></tr></table></figure>
+<pre><code>array([  7.33548881e-02,   6.83026577e-02,   4.30563234e-02,
+         1.59958729e-02,   1.44271213e-02,   1.61089781e-02,
+         1.37680834e-02,   3.30419243e-01,   4.99376357e-02,
+         1.13037983e-01,   8.09265844e-02,   7.21802653e-03,
+         1.68103579e-01,   5.94523572e-05,   1.75085991e-03,
+         3.53271167e-03])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">extra_attribs = [<span class="string">"rooms_per_hhold"</span>, <span class="string">"pop_per_hhold"</span>, <span class="string">"bedrooms_per_room"</span>]</span><br><span class="line">cat_one_hot_attribs = list(encoder.classes_)</span><br><span class="line">attributes = num_attribs + extra_attribs + cat_one_hot_attribs</span><br><span class="line">sorted(zip(feature_importances, attributes), reverse=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>[(0.33041924268078282, &apos;median_income&apos;),
+ (0.16810357872016857, &apos;INLAND&apos;),
+ (0.11303798307184716, &apos;pop_per_hhold&apos;),
+ (0.080926584412980271, &apos;bedrooms_per_room&apos;),
+ (0.073354888107514407, &apos;longitude&apos;),
+ (0.068302657661592367, &apos;latitude&apos;),
+ (0.049937635687884216, &apos;rooms_per_hhold&apos;),
+ (0.043056323384962278, &apos;housing_median_age&apos;),
+ (0.016108978092674749, &apos;population&apos;),
+ (0.015995872935832368, &apos;total_rooms&apos;),
+ (0.014427121335475118, &apos;total_bedrooms&apos;),
+ (0.013768083439830915, &apos;households&apos;),
+ (0.0072180265259504878, &apos;&lt;1H OCEAN&apos;),
+ (0.0035327116730775876, &apos;NEAR OCEAN&apos;),
+ (0.0017508599122762194, &apos;NEAR BAY&apos;),
+ (5.9452357150607577e-05, &apos;ISLAND&apos;)]
+</code></pre><h4 id="Evalute-Your-System-on-the-Test-Set"><a href="#Evalute-Your-System-on-the-Test-Set" class="headerlink" title="Evalute Your System on the Test Set"></a>Evalute Your System on the Test Set</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">final_model = grid_search.best_estimator_</span><br><span class="line">X_test = strat_test_set.drop(<span class="string">"median_house_value"</span>, axis=<span class="number">1</span>)</span><br><span class="line">y_test = strat_test_set[<span class="string">"median_house_value"</span>].copy()</span><br><span class="line">X_test_prepared = full_pipeline.transform(X_test)</span><br><span class="line">final_predictions = final_model.predict(X_test_prepared)</span><br><span class="line">final_mse = mean_squared_error(y_test, final_predictions)</span><br><span class="line">final_rmse = np.sqrt(final_mse)</span><br><span class="line">final_rmse</span><br></pre></td></tr></table></figure>
+<pre><code>47964.376820929021
+</code></pre>
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="http://tweinyan.github.io">Twein Yan</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="http://tweinyan.github.io/2017/11/20/end2endml/">http://tweinyan.github.io/2017/11/20/end2endml/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/读书笔记/">读书笔记</a>
+            
+              <a href="/tags/hands-on-machine-learning/">hands on machine learning</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2017/11/01/graph-databases/">
+        <span class="next-text nav-default">graph-databases</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tweinyan@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tweinyan" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Twein Yan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
