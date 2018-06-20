@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/19/airflow-config/" itemprop="url">airflow安装配置</a></h1>
+                <a class="post-title-link" href="/2018/06/19/airflow-config/" itemprop="url">airflow安装及时区问题</a></h1>
         
 
         <div class="post-meta">
@@ -308,17 +308,21 @@
 <p>也可以仅安装自己需要的组件
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install <span class="string">".[mysql, hive, celery]"</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="时区配置"><a href="#时区配置" class="headerlink" title="时区配置"></a>时区配置</h3><p>根据timezone<a href="https://github.com/apache/incubator-airflow/blob/master/docs/timezone.rst" target="_blank" rel="noopener">文档</a>
-“Support for time zones is enabled by default. Airflow stores datetime information in UTC internally and in the database. It allows you to run your DAGs with time zone dependent schedules. At the moment Airflow does not convert them to the end user’s time zone in the user interface. There it will always be displayed in UTC. Also templates used in Operators are not converted. Time zone information is exposed and it is up to the writer of DAG what do with it.”</p>
-<p>需要注意的是，Web UI 上显示的时间不会被转换为本地时区，而是只需要在写DAG时带入time zone即可</p>
+“Support for time zones is enabled by default. Airflow stores datetime information in UTC internally and in the database. It allows you to run your DAGs with time zone dependent schedules. At the moment Airflow does not convert them to the end user’s time zone in the user interface. There it will always be displayed in UTC. Also templates used in Operators are not converted. Time zone information is exposed and it is up to the writer of DAG what do with it.”
+Web UI 上显示的时间不会被转换为本地时区，而是只需要在写DAG时带入time zone即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> airflow</span><br><span class="line">vim airflow.cfg</span><br></pre></td></tr></table></figure>
-<p>修改配置
+<p>修改
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default_timezone = Asia/Shanghai</span><br></pre></td></tr></table></figure></p>
-<p>查看配置生效
+<p>查看配置生效:
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> airflow.utils <span class="keyword">import</span> timezone</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;a_date = timezone.datetime(<span class="number">2018</span>,<span class="number">6</span>,<span class="number">1</span>)</span><br><span class="line">&gt;&gt;&gt;a_date</span><br></pre></td></tr></table></figure></p>
 <p>输出:
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime.datetime(2018, 6, 1, 0, 0, tzinfo=&lt;Timezone [Asia/Shanghai]&gt;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql_alchemy_conn = mysql://airflow:airflow@localhost:3306/ariflow</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cryptography</span><br></pre></td></tr></table></figure>
+<p><a href="https://bcb.github.io/airflow/fernet-key" target="_blank" rel="noopener">Cenerate a Fernet key for airflow</a></p>
 <h3 id="配置celery模式"><a href="#配置celery模式" class="headerlink" title="配置celery模式"></a>配置celery模式</h3><p>celery需要使用redis
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">executor = CeleryExecutor</span><br><span class="line"></span><br><span class="line">broker_url = redis://localhost:6379/0</span><br><span class="line">celery_result_backend = redis://localhost:6379/1</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install redis</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">executor = CeleryExecutor</span><br><span class="line"></span><br><span class="line">broker_url = redis://localhost:6379/0</span><br><span class="line">celery_result_backend = redis://localhost:6379/1</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1027,7 +1031,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
