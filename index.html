@@ -322,6 +322,7 @@ Web UI 上显示的时间不会被转换为本地时区，而是只需要在写D
 <p><a href="https://bcb.github.io/airflow/fernet-key" target="_blank" rel="noopener">Cenerate a Fernet key for airflow</a></p>
 <h3 id="配置celery模式"><a href="#配置celery模式" class="headerlink" title="配置celery模式"></a>配置celery模式</h3><p>celery需要使用redis
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install redis</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim airflow.cfg</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">executor = CeleryExecutor</span><br><span class="line"></span><br><span class="line">broker_url = redis://localhost:6379/0</span><br><span class="line">celery_result_backend = redis://localhost:6379/1</span><br></pre></td></tr></table></figure>
 
           
